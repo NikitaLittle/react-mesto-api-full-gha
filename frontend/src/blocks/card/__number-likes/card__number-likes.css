@@ -1,0 +1,11 @@
+.card__number-likes {
+  max-width: 25px;
+  margin: 0 auto;
+  color: #000000;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  text-align: center;
+  overflow: hidden;
+}

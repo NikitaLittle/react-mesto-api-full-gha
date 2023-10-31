@@ -1,0 +1,6 @@
+@media (max-width: 530px) {
+  .header__image {
+    margin: 0 0 0 27px;
+    max-width: 104px;
+  }
+}

@@ -1,0 +1,11 @@
+.popup__name {
+  height: 27px;
+  margin: 54px 0 0;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}

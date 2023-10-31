@@ -1,0 +1,26 @@
+.cards {
+  max-width: 880px;
+  margin: 51px auto 0;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 20px 17px;
+}
+
+@media (max-width: 930px) {
+  .cards {
+    max-width: 581px;
+  }
+}
+
+@media (max-width: 620px) {
+  .cards {
+    max-width: 282px;
+  }
+}
+
+@media (max-width: 530px) {
+  .places {
+    margin: 36px auto 0;
+  }
+}

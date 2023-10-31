@@ -1,0 +1,19 @@
+.card__urn-button {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: url('../../../images/urn.svg') no-repeat;
+  background-position: center;
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+.card__urn-button:hover {
+  opacity: 0.5;
+}
