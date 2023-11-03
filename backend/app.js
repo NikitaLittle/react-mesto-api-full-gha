@@ -18,8 +18,8 @@ mongoose
   .then(() => {
     console.log('then');
   })
-  .catch(() => {
-    console.log('catch');
+  .catch((err) => {
+    console.log(err);
   });
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
