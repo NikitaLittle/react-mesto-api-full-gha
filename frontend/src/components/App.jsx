@@ -27,27 +27,32 @@ function App() {
   const [isMessage, setMessage] = useState(false);
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const jwt = localStorage.getItem('jwt');
 
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCardList()])
-      .then(([userInfo, initialCards]) => {
-        setCurrentUser(userInfo);
-        setCards(initialCards);
-      })
-      .catch(console.log());
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(localStorage.jwt), api.getCardList(localStorage.jwt)])
+        .then(([userInfo, initialCards]) => {
+          setCurrentUser(userInfo);
+          setCards(initialCards);
+        })
+        .catch(console.log());
+    }
+  }, [loggedIn]);
 
-    auth
-      .getToken(jwt)
-      .then((res) => {
-        setEmail(res.data.email);
-        setLoggedIn(true);
-        navigate('/');
-      })
-      .catch(() => {
-        setLoggedIn(false);
-        navigate('/sign-in');
-      });
+  useEffect(() => {
+    if (localStorage.jwt) {
+      auth
+        .getToken(localStorage.jwt)
+        .then((res) => {
+          setEmail(res.data.email);
+          setLoggedIn(true);
+          navigate('/');
+        })
+        .catch((res) => {
+          setLoggedIn(false);
+          navigate('/sign-in');
+        });
+    }
   }, []);
 
   function handleEditProfileClick() {
@@ -75,10 +80,10 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
 
     api
-      .changeLikeCardStatus(card._id, isLiked)
+      .changeLikeCardStatus(card._id, isLiked, localStorage.jwt)
       .then((newCard) => {
         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
@@ -87,7 +92,7 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, localStorage.jwt)
       .then(() => {
         setCards((cards) => cards.filter((c) => c !== card));
       })
@@ -96,7 +101,7 @@ function App() {
 
   function handleUpdateUser(onUpdateUser) {
     api
-      .setUserInfo({ name: onUpdateUser.name, about: onUpdateUser.about })
+      .setUserInfo(onUpdateUser, localStorage.jwt)
       .then((updateUser) => {
         setCurrentUser(updateUser);
         closeAllPopups();
@@ -106,7 +111,7 @@ function App() {
 
   function handleUpdateAvatar(onUpdateAvatar) {
     api
-      .setUserAvatar(onUpdateAvatar.avatar)
+      .setUserAvatar(onUpdateAvatar, localStorage.jwt)
       .then((updateAvatar) => {
         setCurrentUser(updateAvatar);
         closeAllPopups();
@@ -116,7 +121,7 @@ function App() {
 
   function handleAddPlaceSubmit(onAddPlace) {
     api
-      .addNewCard({ name: onAddPlace.name, link: onAddPlace.link })
+      .addNewCard(onAddPlace, localStorage.jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -141,8 +146,7 @@ function App() {
   function handleAuthenticationSubmit(email, password) {
     auth
       .authentication(email, password)
-      .then((res) => {
-        localStorage.setItem('jwt', res.token);
+      .then(() => {
         setEmail(email);
         setLoggedIn(true);
         navigate('/');

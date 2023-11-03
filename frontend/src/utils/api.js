@@ -1,7 +1,6 @@
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
   }
 
   _checkResStatus(res) {
@@ -12,74 +11,89 @@ class Api {
     }
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-    }).then((res) => {
-      return this._checkResStatus(res);
-    });
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResStatus);
   }
 
-  getCardList() {
+  getCardList(token) {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }).then((res) => {
       return this._checkResStatus(res);
     });
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about }, token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({ name, about }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name: name, about: about }),
     }).then((res) => {
       return this._checkResStatus(res);
     });
   }
 
-  addNewCard({ name, link }) {
+  addNewCard({ name, link }, token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({ name, link }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name: name, link: link }),
     }).then((res) => {
       return this._checkResStatus(res);
     });
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, token) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-    }).then((res) => {
-      return this._checkResStatus(res);
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(cardId, isLiked, token) {
     if (isLiked) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: this._headers,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }).then((res) => {
         return this._checkResStatus(res);
       });
     } else {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: this._headers,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }).then((res) => {
         return this._checkResStatus(res);
       });
     }
   }
 
-  setUserAvatar(avatarLink) {
+  setUserAvatar({ avatar }, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({ avatar: avatarLink }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ avatar: avatar }),
     }).then((res) => {
       return this._checkResStatus(res);
     });
@@ -87,7 +101,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'http://localhost:3001',
 });
 
 export default api;

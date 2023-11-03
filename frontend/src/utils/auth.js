@@ -1,7 +1,11 @@
-const baseUrl = 'http://localhost:4000';
+const baseUrl = 'http://localhost:3001';
 
 function checkResStatus(res) {
-  return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`${res.status} ${res.statusText}`);
+  }
 }
 
 function register(email, password) {
@@ -23,20 +27,25 @@ function authentication(email, password) {
     headers: {
       'Content-Type': 'application/json',
     },
+    // credentials: 'include',
     body: JSON.stringify({
       password: password,
       email: email,
     }),
-  }).then(checkResStatus);
+  })
+    .then(checkResStatus)
+    .then((res) => {
+      localStorage.setItem('jwt', res.token);
+    });
 }
 
-function getToken(jwt) {
+function getToken(token) {
   return fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${token}`,
     },
+    // credentials: 'include',
   }).then(checkResStatus);
 }
 
