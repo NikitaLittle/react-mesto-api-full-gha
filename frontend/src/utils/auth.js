@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'http://api.mesto.nomoredomainsmonster.ru';
 
 function checkResStatus(res) {
   if (res.ok) {
