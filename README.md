@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/NikitaLittle/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
 IP-адрес 51.250.73.246
 
-Frontend https://mesto.nomoredomainsmonster.ru/
+Frontend https://mesto.nomoredomainsmonster.ru
 
-Backend https://mesto.nomoredomainsmonster.ru/
+Backend https://mesto.nomoredomainsmonster.ru
