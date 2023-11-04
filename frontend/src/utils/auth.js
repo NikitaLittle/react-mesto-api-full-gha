@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.mesto.nomoredomainsmonster.ru';
+const baseUrl = 'https://api.mesto.nomoredomainsmonster.ru';
 
 function checkResStatus(res) {
   if (res.ok) {

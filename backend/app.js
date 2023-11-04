@@ -22,7 +22,7 @@ mongoose
     console.log(err);
   });
 
-app.use(cors({ origin: 'http://mesto.nomoredomainsmonster.ru:3000', credentials: true }));
+app.use(cors({ origin: 'https://mesto.nomoredomainsmonster.ru', credentials: true }));
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
