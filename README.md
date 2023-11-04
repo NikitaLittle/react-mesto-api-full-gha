@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.73.246
 
-Frontend https://...
+Frontend [https://...](https://mesto.nomoredomainsmonster.ru/)https://mesto.nomoredomainsmonster.ru/
 
-Backend https://...
+Backend [https://...](https://api.mesto.nomoredomainsmonster.ru/)https://mesto.nomoredomainsmonster.ru/
