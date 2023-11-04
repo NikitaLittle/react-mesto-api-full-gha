@@ -11,6 +11,6 @@
 
 IP-адрес 51.250.73.246
 
-Frontend [https://...](https://mesto.nomoredomainsmonster.ru/)https://mesto.nomoredomainsmonster.ru/
+Frontend [https://...](https://mesto.nomoredomainsmonster.ru/)mesto.nomoredomainsmonster.ru/
 
-Backend [https://...](https://api.mesto.nomoredomainsmonster.ru/)https://mesto.nomoredomainsmonster.ru/
+Backend [https://...](https://api.mesto.nomoredomainsmonster.ru/)mesto.nomoredomainsmonster.ru/
