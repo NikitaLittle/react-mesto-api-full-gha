@@ -33,7 +33,7 @@ function App() {
       auth
         .getToken(localStorage.jwt)
         .then((res) => {
-          setEmail(res.data.email);
+          setEmail(res.email);
           setLoggedIn(true);
           navigate('/');
         })
@@ -42,7 +42,7 @@ function App() {
           navigate('/sign-in');
         });
     }
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {

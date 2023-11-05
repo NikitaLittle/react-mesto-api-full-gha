@@ -43,6 +43,7 @@ function getToken(token) {
   return fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
