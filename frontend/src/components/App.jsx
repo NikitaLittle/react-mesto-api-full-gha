@@ -29,17 +29,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loggedIn) {
-      Promise.all([api.getUserInfo(localStorage.jwt), api.getCardList(localStorage.jwt)])
-        .then(([userInfo, initialCards]) => {
-          setCurrentUser(userInfo);
-          setCards(initialCards);
-        })
-        .catch(console.log());
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
     if (localStorage.jwt) {
       auth
         .getToken(localStorage.jwt)
@@ -53,7 +42,18 @@ function App() {
           navigate('/sign-in');
         });
     }
-  }, []);
+  }, [navigate]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(localStorage.jwt), api.getCardList(localStorage.jwt)])
+        .then(([userInfo, initialCards]) => {
+          setCurrentUser(userInfo);
+          setCards(initialCards);
+        })
+        .catch(console.log());
+    }
+  }, [loggedIn]);
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
